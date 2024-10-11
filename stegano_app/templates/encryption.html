@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Encryption - Image Steganography Project</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />
+    <link rel="icon" href="{% static 'images/logo.png' %}" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+      .main-section {
+        justify-content: center;
+        height: 90vh;
+        background: #f0edee;
+        color: black;
+      }
+      .cont {
+        margin-bottom: 10px;
+        margin-right: 50px;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+      }
+      .download-container {
+        text-align: center;
+        margin-top: 100px;
+      }
+      .loading-screen {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        z-index: 1000;
+        text-align: center;
+        padding-top: 20%;
+      }
+    </style>
+    <script>
+      function showLoadingScreen() {
+        document.querySelector(".loading-screen").style.display = "block";
+        document.querySelector(".container").style.display = "none";
+      }
+    </script>
+  </head>
+  <body>
+    <div class="main-section">
+      <script src="{% static 'script.js' %}"></script>
+      {% include "navbar.html" %}
+      <div class="loading-screen">
+        <div class="loader">
+          <div class="bar1"></div>
+          <div class="bar2"></div>
+          <div class="bar3"></div>
+          <div class="bar4"></div>
+          <div class="bar5"></div>
+          <div class="bar6"></div>
+        </div>
+      </div>
+      <div class="container mt-5">
+        <h1 class="text-center">Encrypt Your Image</h1>
+        <form
+          action="{% url 'encryption' %}"
+          method="post"
+          enctype="multipart/form-data"
+          onsubmit="showLoadingScreen()"
+        >
+          {% csrf_token %}
+          <div
+            class="form-group"
+            style="color: black; cursor: url('{% static 'images/cursor.png' %}"
+          >
+            <label for="image">Select an Image:</label>
+            <input
+              type="file"
+              class="form-control-file"
+              id="image"
+              name="image"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="text">Enter the Text:</label>
+            <textarea
+              class="form-control"
+              id="text"
+              name="text"
+              rows="3"
+              required
+            ></textarea>
+          </div>
+          <div
+            class="cont"
+            style="cursor: url('{% static 'images/cursor.png' %}"
+          >
+            <button type="submit" class="btn btn-primary">
+              <span>Encrypt</span>
+            </button>
+          </div>
+        </form>
+      </div>
+      {% if message %}
+      <p class="text-center" style="color: black">{{ message }}</p>
+      {% endif %} {% if request.session.image_path %}
+      <div class="download-container">
+        <a
+          href="{% url 'download' %}"
+          class="btn btn-success"
+          style="cursor: url('{% static 'images/cursor.png' %}"
+          >Download Image</a
+        >
+      </div>
+      {% endif %}
+    </div>
+  </body>
+</html>

@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="icon" href="{% static 'images/logo.png' %}" />
+    <title>Image Steganography Project</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />
+    <style>
+      .main-section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80vh;
+        background: #f0edee;
+        color: #7f675b;
+      }
+      .main-section div {
+        margin: 20px;
+      }
+      .btn-custom {
+        padding: 15px 30px;
+        font-size: 18px;
+        border-radius: 25px;
+        transition: background-color 0.3s, color 0.3s;
+      }
+      .btn-custom:hover {
+        background-color: #fff;
+        color: #3a3a3a;
+        cursor: url("{% static "images/cursor.png" %}"), auto;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="{% static 'script.js' %}"></script>
+    {% include "navbar.html" %}
+    <div class="main-section">
+      <div>
+        <a
+          href="encryption/"
+          class="btn btn-danger btn-custom"
+          style="cursor: url('{% static 'images/cursor.png' %}'), auto"
+        >
+          Encrypt Now
+        </a>
+      </div>
+      <div>
+        <a
+          href="decryption/"
+          class="btn btn-danger btn-custom"
+          style="cursor: url('{% static 'images/cursor.png' %}'), auto"
+        >
+          Decrypt Now
+        </a>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

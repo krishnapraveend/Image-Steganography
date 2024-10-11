@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Decryption - Image Steganography Project</title>
+    <link rel="icon" href="{% static 'images/logo.png' %}" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />
+    <style>
+      .main-section {
+        justify-content: center;
+        height: 90vh;
+        background: #f0edee;
+        color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-section">
+      <script src="{% static 'script.js' %}"></script>
+      {% include "navbar.html" %}
+      <div class="container mt-5">
+        <h1 class="text-center">Decrypt Text from Image</h1>
+        <form
+          class="mt-5"
+          action="{% url 'decryption' %}"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          {% csrf_token %}
+          <div class="form-group" style="color: black">
+            <label for="image">Encrypted Image:</label>
+            <input
+              type="file"
+              name="image"
+              id="image"
+              class="form-control-file"
+              required
+            />
+          </div>
+          <div
+            class="cont"
+            style="cursor: url('{% static 'images/cursor.png' %}"
+          >
+            <button type="submit" value="Decrypt" class="btn btn-primary">
+              <span>Submit</span>
+            </button>
+          </div>
+        </form>
+        {% if text %}
+        <div class="alert alert-success mt-3">
+          <h4>Decrypted Text:</h4>
+          <p>{{ text }}</p>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </body>
+</html>
